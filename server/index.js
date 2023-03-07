@@ -1,6 +1,9 @@
 import express from "express";
 const app = express();
 import mongoose from "mongoose";
+import cors from "cors";
+
+app.use(cors({ origin: "*" }));
 
 app.get("/", (req, res) => {
     res.send("Hello World");
