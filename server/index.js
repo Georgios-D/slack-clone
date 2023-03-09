@@ -56,25 +56,7 @@ const messageSchema = new mongoose.Schema(
 const Message = mongoose.model("messages", messageSchema);
 
 app.get("/channels/:id", async (req, res) => {
-    await Message.insertMany([
-        {
-            text: "First Message",
-            user: {
-                name: "John Doe",
-                image: "https://avatars.githubusercontent.com/u/25107756?v=4",
-            },
-            channelId: "64007b739f9f1b9023ecc194",
-        },
-        {
-            text: "Second Message",
-            user: {
-                name: "John Doe",
-                image: "https://avatars.githubusercontent.com/u/25107756?v=4",
-            },
-            channelId: "64007b739f9f1b9023ecc194",
-        },
-    ]);
-    const messages = await Message.find();
+    const messages = await Message.find({ channelId: req.params.id });
     res.send(messages);
 });
 
